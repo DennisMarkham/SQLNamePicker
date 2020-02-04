@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang = "en">
+<head>
+  <meta charset="UTF-8">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+</head>
+<body>
+	
+	<select id = "select">
+	<option>Starts with:</option>
+	<option>Ends with:</option>
+	<option>Contains:</option>	
+</select>
+<input type = "text" id ="textfield"> 
+<button onClick = "showList();">submit </button>
+
+
+<script>
+function showList(){
+//something has to be posted to the server, to show the variables in the input field
+//and the drop down.  Then something has to be gotten.
+
+var newQuery =
+{
+	dropDown: $( "#select option:selected" ).text(),
+	string: $("#textfield").val()
+}
+
+console.log(newQuery);
+  $.post("/api/new", newQuery)
+      .then(function(data) {
+        console.log(data);
+      });  
+
+
+      $.get("/api/nameList", function(data) {
+        console.log(data);  
+      });
+
+
+    };	
+	
+</script>
+	</body>
+</html>
+
+
